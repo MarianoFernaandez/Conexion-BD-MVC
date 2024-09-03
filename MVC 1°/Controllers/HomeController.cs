@@ -21,7 +21,7 @@ namespace MVC_1_.Controllers
         {
             if (db.Usuarios.Any(x => x.Email == usuario.Email))
             {
-                ViewBag.Notification = "Esta cuenta ya se encuentra creada";
+                ViewBag.Notification = "Esta cuenta ya existe";
                 return View();
             }
             else
@@ -33,7 +33,8 @@ namespace MVC_1_.Controllers
                 HttpContext.Session.SetString("email", usuario.Email.ToString());
                 HttpContext.Session.SetString("clave", usuario.Clave.ToString());
                 return RedirectToAction("Index", "Home");
-            }   
+            }
+
         }
 
         public HomeController(ILogger<HomeController> logger)
