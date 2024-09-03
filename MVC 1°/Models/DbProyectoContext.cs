@@ -18,8 +18,8 @@ public partial class DbProyectoContext : DbContext
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=GCNB-470\\LAUTAROSERVER;+" +
-            "Initial Catalog=db_proyecto;+" +
+        => optionsBuilder.UseSqlServer("Server=GCNB-470\\LAUTAROSERVER;" +
+            "Initial Catalog=db_proyecto;" +
             "Integrated Security=True;Encrypt=True;Trust Server Certificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
