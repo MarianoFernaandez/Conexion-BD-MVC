@@ -44,7 +44,7 @@ namespace MVC_1_.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(db.Usuarios.ToList());
         }
 
         public IActionResult Privacy()
@@ -56,6 +56,35 @@ namespace MVC_1_.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        
+        public ActionResult LogIn()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public ActionResult LogIn(Usuario usuario)
+        {
+            var checkLogin = db.Usuarios.Where(x => x.Email.Equals(usuario.Email)
+            && x.Clave.Equals(usuario.Clave))
+                .FirstOrDefault();
+
+            if (checkLogin != null)
+            {
+                HttpContext.Session.SetString("email", usuario.Email.ToString());
+                HttpContext.Session.SetString("clave", usuario.Clave.ToString());
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewBag.Notification = "Email o clave incorrectas";
+            }
+            return View();
         }
     }
 }
