@@ -23,6 +23,8 @@ public partial class Usuario
     [DataType(DataType.Password)]
     [Compare("Clave", ErrorMessage = "Las claves no coinciden")]
 
+
+
     public string? ReClave {  get; set; }
     
 }
